@@ -3,7 +3,7 @@
  * Démontre tous les hooks du cycle de vie et les capacités de base
  */
 
-import type { Plugin, PluginAction } from '../../types';
+import type { Plugin } from '../../types';
 import { notificationService } from '../../../services/notificationService';
 
 export const dummyPlugin: Plugin = {
