@@ -51,6 +51,26 @@ Actions can have different contexts:
 - `global` - Available everywhere in the app
 - `library` - Available in the library view
 - `settings` - Available in plugin settings view
+- `book` - Available on individual book items (receives bookId in onClick data)
+
+### Sidebar Integration
+
+Plugins can add custom sidebar tabs with the `sidebar` property:
+
+```typescript
+sidebar: {
+  id: 'plugin-tab-id',           // Unique tab ID
+  label: 'Tab Name',              // Display label
+  icon: 'TagRegular',             // Fluent UI icon
+  position: 'top' | 'bottom',     // Placement in sidebar
+  color: '#8b5cf6',               // Tab color (hex)
+  component: 'ComponentName',     // React component to render
+}
+```
+
+**Current sidebar plugins:**
+- `nav-tags`: Purple tab (#8b5cf6) at top - Tag navigation
+- `bug-tracker`: Red tab (#ef4444) at bottom - Bug reporting
 
 ## Plugin Import Pattern
 
@@ -81,11 +101,33 @@ Some plugins (like `epub-to-pdf`) include Rust modules:
 
 ## Current Plugins
 
-- **dummy-plugin**: Example/test plugin demonstrating all lifecycle hooks
+### Documentation & Reference
+- **dummy-plugin (Plugin Documentation)**: **Start here!** Complete plugin system documentation
+  - `PLUGIN_SPEC.md` - Full API specifications and interfaces
+  - `DEVELOPMENT_GUIDE.md` - Step-by-step guide for creating plugins
+  - `EXAMPLES.md` - 8 complete, copy-paste ready plugin examples
+  - `BEST_PRACTICES.md` - Code quality, performance, and security guidelines
+  - Interactive demo actions showcasing all plugin features
+  - This is the **single source of truth** for plugin development
+
+### Production Plugins
 - **csv-export**: Export library to CSV (implements ExportPlugin interface)
 - **kobo-sync**: USB sync to Kobo e-readers (enabled by default)
 - **kindle-sync**: USB sync to Kindle devices with EPUB→MOBI conversion
 - **epub-to-pdf**: Convert EPUB books to PDF with configurable settings
+- **nav-tags**: Tag-based navigation with sidebar integration (purple tab)
+  - Displays all library tags with sub-tabs for filtering
+  - Tag statistics and flexible sorting options
+  - Sidebar position: top, with purple theme (#8b5cf6)
+
+### Development & Internal Tools
+- **fake-sync**: Testing plugin simulating Kobo/Kindle/USB devices
+  - 12 realistic e-reader models
+  - Configurable delays and failure rates for testing
+- **bug-tracker**: Internal bug reporting with GitHub Issues integration
+  - Red sidebar tab for quick access
+  - Auto-collects system context (OS, browser, screen)
+  - Screenshot capture and GitHub CLI integration
 
 ## Plugin Settings Pattern
 

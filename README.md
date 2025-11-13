@@ -4,31 +4,42 @@ This repository contains core plugins for [Stomy](https://github.com/izo/Stomy),
 
 ## Available Plugins
 
-### dummy-plugin
-Example plugin demonstrating the plugin API. Shows how to:
-- Register plugin metadata
-- Add custom actions
-- Handle lifecycle hooks
-- Display notifications
+### 📚 Plugin Documentation (dummy-plugin)
+**Reference plugin and complete documentation.** Contains:
+- **PLUGIN_SPEC.md**: Complete API specifications and interface documentation
+- **DEVELOPMENT_GUIDE.md**: Step-by-step guide for creating plugins
+- **EXAMPLES.md**: 8 complete plugin examples ready to copy
+- **BEST_PRACTICES.md**: Code quality, performance, and security guidelines
+- Interactive demo actions showcasing all plugin features
 
-### csv-export
-Export your entire library to a CSV file with all book metadata including title, author, series, format, and file paths.
+This is the **single source of truth** for plugin development. Start here!
 
-### kobo-sync
+### 📊 CSV Export
+Export your entire library to a CSV file with all book metadata including title, author, series, format, and file paths. Perfect for backups or external analysis.
+
+### 🏷️ Nav Tags
+**NEW!** Navigation by tags in the sidebar. Features:
+- Dedicated purple sidebar tab showing all library tags
+- Sub-tabs for each tag to filter content
+- Tag statistics (total, average, most used)
+- Flexible sorting (alphabetical or by popularity)
+- Configurable display options
+
+### 📱 Kobo Sync
 **Enabled by default.** Synchronize your ebook library with Kobo e-reader devices via USB. Features:
 - Automatic Kobo device detection
 - Native support for EPUB, PDF, MOBI, CBZ formats
 - Smart sync with duplicate detection
 - Device storage monitoring
 
-### kindle-sync
+### 📱 Kindle Sync
 Synchronize your ebook library with Amazon Kindle devices via USB. Features:
 - Automatic Kindle device detection
 - EPUB to MOBI conversion using iepub library
 - Support for all Kindle models with USB mass storage
 - Configurable conversion settings
 
-### epub-to-pdf
+### 📄 EPUB to PDF
 Convert EPUB files to PDF format directly from Stomy. Features:
 - Right-click context menu integration
 - Batch conversion of multiple books
@@ -36,6 +47,21 @@ Convert EPUB files to PDF format directly from Stomy. Features:
 - Flexible output location (desktop, custom folders)
 - Configurable page size, margins, and quality settings
 - Preserves images, TOC, and formatting
+
+### 🧪 Fake Sync
+Development plugin for testing sync functionality without real devices. Features:
+- Simulates Kobo, Kindle, and USB devices
+- 12 realistic e-reader models
+- Configurable sync delays and failure rates
+- Progress tracking and device detection simulation
+
+### 🐛 Bug Tracker
+Internal tool for reporting bugs with automatic system context collection. Features:
+- Red sidebar tab for quick access
+- Automatic system info collection (OS, browser, screen)
+- Screenshot capture with html2canvas
+- GitHub Issues integration via CLI
+- Context-aware bug reports
 
 ## Plugin Development Guide
 
