@@ -1,0 +1,11 @@
+{
+  "id": "kobo-sync",
+  "name": "Kobo Sync",
+  "description": "Synchronize your ebook library with Kobo e-reader devices via USB. Native support for EPUB format.",
+  "version": "1.0.0",
+  "author": "Stomy Team",
+  "icon": "BookOpen",
+  "repository": "",
+  "permissions": ["fs:read", "fs:write", "tauri:*"],
+  "dependencies": []
+}
