@@ -1,0 +1,13 @@
+{
+  "id": "nav-tags",
+  "name": "Nav Tags",
+  "description": "Navigation par tags dans la sidebar avec filtrage de contenu par tag",
+  "version": "1.0.0",
+  "author": "Stomy Team",
+  "icon": "TagRegular",
+  "repository": "https://github.com/izo/stomy-plugins",
+  "permissions": [],
+  "dependencies": [],
+  "tags": ["navigation", "tags", "sidebar", "filtering"],
+  "category": "navigation"
+}

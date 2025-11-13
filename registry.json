@@ -78,6 +78,25 @@
       "tags": ["csv", "export", "backup", "spreadsheet"],
       "homepage": "https://github.com/izo/stomy-plugins",
       "enabled": false
+    },
+    {
+      "id": "nav-tags",
+      "name": "Nav Tags",
+      "description": "Navigation par tags dans la sidebar avec filtrage de contenu par tag",
+      "version": "1.0.0",
+      "author": "Stomy Team",
+      "icon": "TagRegular",
+      "repository": "https://github.com/izo/stomy-plugins/tree/main/nav-tags",
+      "downloads": 0,
+      "stars": 0,
+      "lastUpdate": "2025-01-13T22:00:00Z",
+      "createdAt": "2025-01-13T22:00:00Z",
+      "installed": false,
+      "updateAvailable": false,
+      "categories": ["navigation"],
+      "tags": ["navigation", "tags", "sidebar", "filtering"],
+      "homepage": "https://github.com/izo/stomy-plugins",
+      "enabled": false
     }
   ]
 }
