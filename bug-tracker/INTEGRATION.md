@@ -5,7 +5,7 @@ Ce guide explique comment intégrer le plugin Bug Tracker dans l'application pri
 ## 🎯 Vue d'Ensemble
 
 Le Bug Tracker ajoute un onglet rouge dans la sidebar de l'application avec :
-- **Icône** : Bug (Lucide)
+- **Icône** : BugRegular (Fluent UI System Icons)
 - **Couleur** : Rouge (#ef4444)
 - **Position** : Au-dessus du footer de la sidebar
 - **Composant** : Panel de soumission de bugs
@@ -90,7 +90,7 @@ Créer `src/components/plugins/BugTrackerPanel.tsx` :
 
 ```tsx
 import React, { useState } from 'react';
-import { Bug, Send, AlertCircle } from 'lucide-react';
+import { BugRegular, SendRegular, InfoRegular } from '@fluentui/react-icons';
 import { submitBugReport } from '@/plugins/core/bug-tracker';
 import { notificationService } from '@/services/notificationService';
 
@@ -157,7 +157,7 @@ export function BugTrackerPanel() {
       {/* Header */}
       <div className="p-4 border-b border-gray-200 dark:border-gray-700">
         <div className="flex items-center gap-2">
-          <Bug className="w-5 h-5 text-red-500" />
+          <BugRegular className="w-5 h-5 text-red-500" />
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
             Signaler un Bug
           </h2>
@@ -243,7 +243,7 @@ export function BugTrackerPanel() {
 
         {/* Info Box */}
         <div className="flex gap-3 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-md">
-          <AlertCircle className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
+          <InfoRegular className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
           <div className="text-sm text-blue-700 dark:text-blue-300">
             <p className="font-medium mb-1">Informations collectées automatiquement :</p>
             <ul className="list-disc list-inside space-y-0.5 text-xs">
@@ -271,7 +271,7 @@ export function BugTrackerPanel() {
             </>
           ) : (
             <>
-              <Send className="w-4 h-4" />
+              <SendRegular className="w-4 h-4" />
               Soumettre le bug
             </>
           )}
@@ -287,7 +287,7 @@ export function BugTrackerPanel() {
 Modifier `src/components/Sidebar.tsx` ou le composant qui gère la sidebar :
 
 ```tsx
-import { Bug } from 'lucide-react';
+import { BugRegular } from '@fluentui/react-icons';
 import { BugTrackerPanel } from './plugins/BugTrackerPanel';
 import { pluginManager } from '@/plugins';
 
@@ -300,8 +300,8 @@ export function Sidebar() {
       {/* Sidebar Navigation */}
       <div className="w-16 bg-gray-100 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700">
         {/* Regular tabs */}
-        <SidebarTab icon={Library} label="Bibliothèque" active={activeTab === 'library'} onClick={() => setActiveTab('library')} />
-        <SidebarTab icon={Settings} label="Paramètres" active={activeTab === 'settings'} onClick={() => setActiveTab('settings')} />
+        <SidebarTab icon={LibraryRegular} label="Bibliothèque" active={activeTab === 'library'} onClick={() => setActiveTab('library')} />
+        <SidebarTab icon={SettingsRegular} label="Paramètres" active={activeTab === 'settings'} onClick={() => setActiveTab('settings')} />
 
         {/* Spacer to push bug tracker to bottom */}
         <div className="flex-1" />
@@ -309,7 +309,7 @@ export function Sidebar() {
         {/* Bug Tracker Tab - positioned above footer */}
         {bugTrackerEnabled && (
           <SidebarTab
-            icon={Bug}
+            icon={BugRegular}
             label="Bug Tracker"
             active={activeTab === 'bug-tracker'}
             onClick={() => setActiveTab('bug-tracker')}

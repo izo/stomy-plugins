@@ -25,7 +25,7 @@ Plugin de feedback intégré permettant aux utilisateurs de soumettre des bugs d
 ### Intégration Sidebar
 
 Le plugin ajoute un onglet rouge dans la sidebar avec :
-- **Icône** : `Bug` (Lucide)
+- **Icône** : `BugRegular` (Fluent UI System Icons)
 - **Couleur** : Rouge (#ef4444)
 - **Position** : Au-dessus du footer
 - **Composant** : `BugTrackerPanel` (à implémenter dans l'app principale)
@@ -263,7 +263,7 @@ Le plugin définit une propriété `sidebar` :
 sidebar: {
   id: 'bug-tracker-tab',
   label: 'Bug Tracker',
-  icon: 'Bug',
+  icon: 'BugRegular',
   position: 'bottom',
   color: '#ef4444', // Tailwind red-500
   component: 'BugTrackerPanel',

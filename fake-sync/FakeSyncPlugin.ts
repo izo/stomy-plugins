@@ -169,13 +169,13 @@ function formatBytes(bytes: number): string {
 function getDeviceIcon(deviceType: DeviceType): string {
   switch (deviceType) {
     case 'kobo':
-      return 'BookOpen';
+      return 'BookOpenRegular';
     case 'kindle':
-      return 'BookMarked';
+      return 'BookmarkRegular';
     case 'usb':
-      return 'Usb';
+      return 'UsbStickRegular';
     default:
-      return 'HardDrive';
+      return 'StorageRegular';
   }
 }
 
@@ -186,7 +186,7 @@ export const fakeSyncPlugin: Plugin = {
     'Simulates synchronization with e-reader devices (Kobo, Kindle, USB) for development and testing purposes.',
   version: '1.0.0',
   author: 'Stomy Team',
-  icon: 'TestTube',
+  icon: 'BeakerRegular',
   enabled: false,
 
   permissions: [],
@@ -230,7 +230,7 @@ export const fakeSyncPlugin: Plugin = {
     {
       id: 'detect-fake-device',
       label: 'Detect Fake Device',
-      icon: 'Search',
+      icon: 'SearchRegular',
       context: 'global',
       onClick: async function () {
         try {
@@ -281,7 +281,7 @@ export const fakeSyncPlugin: Plugin = {
     {
       id: 'disconnect-fake-device',
       label: 'Disconnect Device',
-      icon: 'XCircle',
+      icon: 'DismissCircleRegular',
       context: 'global',
       onClick: async function () {
         if (!currentFakeDevice) {
@@ -306,7 +306,7 @@ export const fakeSyncPlugin: Plugin = {
     {
       id: 'sync-to-fake-device',
       label: 'Sync to Fake Device',
-      icon: 'Download',
+      icon: 'ArrowDownloadRegular',
       context: 'library',
       onClick: async function (data?: any) {
         try {
@@ -379,7 +379,7 @@ export const fakeSyncPlugin: Plugin = {
     {
       id: 'get-device-info',
       label: 'Get Device Info',
-      icon: 'Info',
+      icon: 'InfoRegular',
       context: 'settings',
       onClick: async function () {
         if (!currentFakeDevice) {
@@ -421,7 +421,7 @@ ${currentFakeDevice.supportedFormats.map((f) => f.toUpperCase()).join(', ')}
     {
       id: 'fake-sync-settings',
       label: 'Fake Sync Settings',
-      icon: 'Settings',
+      icon: 'SettingsRegular',
       action: async () => {
         console.log('[FakeSyncPlugin] Opening settings (to be implemented in main app)');
       },

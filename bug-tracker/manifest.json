@@ -4,7 +4,7 @@
   "description": "Système de feedback intégré pour soumettre des bugs directement vers GitHub Issues",
   "version": "1.0.0",
   "author": "Stomy Team",
-  "icon": "Bug",
+  "icon": "BugRegular",
   "enabled": false,
   "permissions": [
     "tauri:*",
@@ -14,7 +14,7 @@
     "enabled": true,
     "position": "bottom",
     "color": "#ef4444",
-    "icon": "Bug"
+    "icon": "BugRegular"
   },
   "settings": {
     "githubRepo": {

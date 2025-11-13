@@ -72,8 +72,8 @@ export const myPlugin: Plugin = {
   // Optional repository URL
   repository: 'https://github.com/user/plugin',
 
-  // Optional icon from Lucide React
-  icon: 'Puzzle',
+  // Optional icon from Fluent UI System Icons
+  icon: 'PuzzlePieceRegular',
 
   // Initial enabled state
   enabled: false,
@@ -127,7 +127,7 @@ interface Plugin {
   author: string;                // Author name
   repository?: string;           // Git repository URL
   updateUrl?: string;            // Update check URL
-  icon?: string;                 // Lucide icon name
+  icon?: string;                 // Fluent UI System Icon name
   enabled: boolean;              // Enabled state
   settings?: Record<string, any>; // Custom settings
   actions?: PluginAction[];      // Custom actions
@@ -147,7 +147,7 @@ interface Plugin {
 interface PluginAction {
   id: string;           // Unique action ID
   label: string;        // Button label
-  icon?: string;        // Lucide icon name
+  icon?: string;        // Fluent UI System Icon name
   onClick: () => void | Promise<void>; // Action handler
 }
 ```
@@ -232,14 +232,18 @@ pluginManager.on('plugin:disabled', (data) => {
 
 ### Icons
 
-Plugins can use any icon from [Lucide React](https://lucide.dev/):
+Plugins can use any icon from [Fluent UI System Icons](https://react.fluentui.dev/?path=/docs/icons-catalog--docs):
 
 ```typescript
-icon: 'FileSpreadsheet'  // For CSV plugin
-icon: 'Download'         // For export functionality
-icon: 'Upload'           // For import functionality
-icon: 'Puzzle'           // Generic plugin icon
+icon: 'DocumentTableRegular'    // For CSV plugin
+icon: 'ArrowDownloadRegular'    // For export functionality
+icon: 'ArrowUploadRegular'      // For import functionality
+icon: 'PuzzlePieceRegular'      // Generic plugin icon
+icon: 'BugRegular'              // For bug/debug plugins
+icon: 'BookOpenRegular'         // For book-related features
 ```
+
+**Note**: Use `Regular` variant for default state and `Filled` for active/selected states.
 
 ### Testing Plugins
 

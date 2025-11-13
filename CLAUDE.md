@@ -103,7 +103,10 @@ Settings are defined in the plugin's `settings` property and typed with an inter
 - **Plugin IDs**: Use kebab-case (e.g., `epub-to-pdf`, not `epubToPdf`)
 - **Error Handling**: All async operations in lifecycle hooks must have try-catch blocks
 - **Notifications**: Long-running operations should show user feedback via `notificationService`
-- **Icons**: Use Lucide React icon names (e.g., `BookOpen`, `FileSpreadsheet`)
+- **Icons**: Use Fluent UI System Icons names (e.g., `BookOpenRegular`, `DocumentTableRegular`, `BugRegular`)
+  - Regular variant for normal state, Filled variant for active/selected states
+  - Icon names follow pattern: `[Name][Regular|Filled]`
+  - See https://react.fluentui.dev/?path=/docs/icons-catalog--docs
 - **Versioning**: Follow semantic versioning for plugin versions
 - **Enabled by default**: Only kobo-sync is enabled by default (most plugins are `enabled: false`)
 

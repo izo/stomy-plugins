@@ -230,7 +230,7 @@ export const bugTrackerPlugin: Plugin = {
     'Système de feedback intégré permettant de soumettre des bugs directement depuis l\'application vers GitHub Issues.',
   version: '1.0.0',
   author: 'Stomy Team',
-  icon: 'Bug',
+  icon: 'BugRegular',
   enabled: false,
 
   permissions: ['tauri:*', 'shell:*'],
@@ -251,7 +251,7 @@ export const bugTrackerPlugin: Plugin = {
   sidebar: {
     id: 'bug-tracker-tab',
     label: 'Bug Tracker',
-    icon: 'Bug',
+    icon: 'BugRegular',
     position: 'bottom', // Position above footer
     color: '#ef4444', // Red color (Tailwind red-500)
     component: 'BugTrackerPanel', // Component name to render
@@ -294,7 +294,7 @@ export const bugTrackerPlugin: Plugin = {
     {
       id: 'check-github-auth',
       label: 'Vérifier authentification GitHub',
-      icon: 'CheckCircle',
+      icon: 'CheckmarkCircleRegular',
       context: 'settings',
       onClick: async function () {
         try {
@@ -331,7 +331,7 @@ export const bugTrackerPlugin: Plugin = {
     {
       id: 'submit-test-bug',
       label: 'Tester soumission de bug',
-      icon: 'Send',
+      icon: 'SendRegular',
       context: 'settings',
       onClick: async function () {
         try {
@@ -417,7 +417,7 @@ export const bugTrackerPlugin: Plugin = {
     {
       id: 'bug-tracker-settings',
       label: 'Paramètres Bug Tracker',
-      icon: 'Settings',
+      icon: 'SettingsRegular',
       action: async () => {
         console.log('[BugTrackerPlugin] Opening settings');
       },
