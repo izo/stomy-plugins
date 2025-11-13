@@ -5,7 +5,7 @@
 
 import { invoke } from '@tauri-apps/api/core';
 import type { Plugin } from '../types';
-import { notificationService } from '../../services/notificationService';
+import { notificationService } from '@/services/notificationService';
 import type {
   BugReport,
   SystemContext,

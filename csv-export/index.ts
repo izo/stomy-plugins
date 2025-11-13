@@ -7,8 +7,8 @@ import type { ExportPlugin, ExportResult } from '../../types';
 import type { Book } from '../../../types/models';
 import { save } from '@tauri-apps/plugin-dialog';
 import { writeTextFile } from '@tauri-apps/plugin-fs';
-import { notificationService } from '../../../services/notificationService';
-import { libraryService } from '../../../services/libraryService';
+import { notificationService } from '@/services/notificationService';
+import { libraryService } from '@/services/libraryService';
 
 /**
  * Convertit un livre en ligne CSV
