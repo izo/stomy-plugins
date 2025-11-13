@@ -105,7 +105,7 @@
       "version": "1.0.0",
       "author": "Stomy Team",
       "icon": "BugRegular",
-      "repository": "https://github.com/izo/stomy-plugins/tree/main/optional/bug-tracker",
+      "repository": "https://github.com/izo/stomy-plugins/tree/main/core/bug-tracker",
       "downloads": 0,
       "stars": 0,
       "lastUpdate": "2024-11-13T21:00:00Z",
