@@ -7,7 +7,7 @@
   "license": "MIT",
   "icon": "BookOpen24Regular",
   "homepage": "https://openlibrary.org",
-  "repository": "https://github.com/izo/stomy-plugins/tree/main/open-library",
+  "repository": "https://github.com/izo/stomy-plugins/tree/main/core/open-library",
 
   "main": "index.ts",
   "permissions": [],
