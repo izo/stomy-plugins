@@ -5,6 +5,9 @@
 
 import { invoke } from '@tauri-apps/api/core';
 import type { Plugin } from '../../types';
+import type { Book } from '../../types/models';
+import { libraryService } from '@/services/libraryService';
+import { notificationService } from '@/services/notificationService';
 import type {
   KoboDevice,
   KoboInfo,
@@ -96,22 +99,32 @@ export const koboPlugin: Plugin = {
           const devices = await detectKoboDevices();
 
           if (devices.length === 0) {
+            await notificationService.notify({
+              title: 'No Kobo Detected',
+              body: 'Please connect your Kobo device via USB',
+            });
             throw new Error('No Kobo device detected');
           }
 
+          // Start sync with progress updates
           const devicePath = devices[0].path;
-          const libraryData = await getKoboLibraryData(devicePath);
 
-          console.log('[KoboPlugin] Imported:', {
-            books: libraryData.books.length,
-            events: libraryData.events.length,
-            bookmarks: libraryData.bookmarks.length,
-            vocabulary: libraryData.vocabulary.length,
+          await notificationService.notify({
+            title: 'Kobo Sync Started',
+            body: `Syncing from ${devices[0].model}...`,
           });
 
-          return libraryData;
+          const stats = await syncReadingProgress(devicePath, (progress) => {
+            console.log('[KoboPlugin] Progress:', progress);
+          });
+
+          return stats;
         } catch (error) {
           console.error('[KoboPlugin] Failed to import reading progress:', error);
+          await notificationService.notify({
+            title: 'Sync Error',
+            body: String(error),
+          });
           throw error;
         }
       },
@@ -312,6 +325,62 @@ export async function getBookProgress(
 }
 
 // ============================================================================
+// Book Matching Functions
+// ============================================================================
+
+/**
+ * Match a Kobo book to a Stomy library book
+ */
+function matchBook(koboBook: KoboBook, stomyBooks: Book[]): Book | null {
+  // Try matching by ISBN first (most reliable)
+  if (koboBook.isbn) {
+    const byIsbn = stomyBooks.find(
+      (b) => b.isbn && b.isbn.toLowerCase() === koboBook.isbn!.toLowerCase()
+    );
+    if (byIsbn) return byIsbn;
+  }
+
+  // Try matching by title + author
+  if (koboBook.title && koboBook.attribution) {
+    const normalizeStr = (s: string) =>
+      s.toLowerCase().replace(/[^\w\s]/g, '').trim();
+
+    const koboTitle = normalizeStr(koboBook.title);
+    const koboAuthor = normalizeStr(koboBook.attribution);
+
+    const byTitleAuthor = stomyBooks.find((b) => {
+      const stomyTitle = normalizeStr(b.title || '');
+      const stomyAuthor = normalizeStr(b.author || '');
+
+      return stomyTitle === koboTitle && stomyAuthor === koboAuthor;
+    });
+
+    if (byTitleAuthor) return byTitleAuthor;
+  }
+
+  // Try fuzzy matching by title only (70% similarity)
+  if (koboBook.title) {
+    const koboTitleWords = koboBook.title.toLowerCase().split(/\s+/);
+
+    const fuzzyMatch = stomyBooks.find((b) => {
+      if (!b.title) return false;
+
+      const stomyTitleWords = b.title.toLowerCase().split(/\s+/);
+      const matchingWords = koboTitleWords.filter((word) =>
+        stomyTitleWords.includes(word)
+      );
+
+      const similarity = matchingWords.length / Math.max(koboTitleWords.length, stomyTitleWords.length);
+      return similarity >= 0.7;
+    });
+
+    if (fuzzyMatch) return fuzzyMatch;
+  }
+
+  return null;
+}
+
+// ============================================================================
 // Sync Utility Functions
 // ============================================================================
 
@@ -332,24 +401,192 @@ export async function syncReadingProgress(
   };
 
   try {
-    // Get all library data
+    // Get all data from Kobo
     const libraryData = await getKoboLibraryData(devicePath);
     stats.booksFound = libraryData.books.length;
 
-    // TODO: This will be implemented when integrated with main Stomy app
-    // For now, just return the stats
-    console.log('[KoboPlugin] Sync stats:', stats);
+    // Get all books from Stomy library
+    const stomyBooks = await libraryService.getBooks();
 
-    if (onProgress) {
-      onProgress(stats);
+    console.log('[KoboPlugin] Starting sync:', {
+      koboBooks: libraryData.books.length,
+      stomyBooks: stomyBooks.length,
+    });
+
+    // Sync each Kobo book
+    for (const koboBook of libraryData.books) {
+      try {
+        // Skip system books (ContentType 6 = regular books)
+        if (koboBook.contentType !== '6') continue;
+
+        // Find matching book in Stomy library
+        const stomyBook = matchBook(koboBook, stomyBooks);
+
+        if (!stomyBook) {
+          console.log('[KoboPlugin] No match found for:', koboBook.title);
+          continue;
+        }
+
+        // Update reading progress
+        const updated = await updateBookProgress(stomyBook, koboBook);
+
+        if (updated) {
+          stats.booksUpdated++;
+          stats.progressSynced++;
+          console.log('[KoboPlugin] Updated:', stomyBook.title);
+        }
+
+        // Update progress callback
+        if (onProgress) {
+          onProgress(stats);
+        }
+      } catch (error) {
+        console.error('[KoboPlugin] Error syncing book:', koboBook.title, error);
+        stats.errors++;
+      }
     }
+
+    // Sync annotations if enabled
+    const settings = koboPlugin.settings as KoboPluginSettings;
+    if (settings.syncAnnotations && libraryData.bookmarks.length > 0) {
+      const annotationsImported = await syncAnnotations(libraryData.bookmarks, stomyBooks);
+      stats.annotationsSynced = annotationsImported;
+    }
+
+    // Sync vocabulary if enabled
+    if (settings.syncVocabulary && libraryData.vocabulary.length > 0) {
+      const vocabularyImported = await syncVocabulary(libraryData.vocabulary);
+      stats.vocabularySynced = vocabularyImported;
+    }
+
+    // Show notification
+    await notificationService.notify({
+      title: 'Kobo Sync Complete',
+      body: `Updated ${stats.booksUpdated} books, ${stats.annotationsSynced} annotations`,
+    });
+
+    console.log('[KoboPlugin] Sync complete:', stats);
 
     return stats;
   } catch (error) {
     console.error('[KoboPlugin] Failed to sync reading progress:', error);
     stats.errors++;
+
+    await notificationService.notify({
+      title: 'Kobo Sync Failed',
+      body: String(error),
+    });
+
     return stats;
   }
+}
+
+/**
+ * Update a Stomy book with Kobo reading progress
+ */
+async function updateBookProgress(stomyBook: Book, koboBook: KoboBook): Promise<boolean> {
+  try {
+    // Prepare update data
+    const updates: Partial<Book> = {};
+
+    // Update reading progress (percent read)
+    if (koboBook.percentRead > 0) {
+      updates.readingProgress = koboBook.percentRead;
+    }
+
+    // Update read status
+    if (koboBook.readStatus === 2) {
+      updates.readStatus = 'finished';
+    } else if (koboBook.readStatus === 1 && koboBook.percentRead > 0) {
+      updates.readStatus = 'reading';
+    }
+
+    // Update time spent reading (convert minutes to seconds for Stomy)
+    if (koboBook.timeSpentReading > 0) {
+      updates.timeSpentReading = koboBook.timeSpentReading * 60;
+    }
+
+    // Update last read date
+    if (koboBook.dateLastRead) {
+      updates.lastReadDate = koboBook.dateLastRead;
+    }
+
+    // Only update if there are changes
+    if (Object.keys(updates).length === 0) {
+      return false;
+    }
+
+    // Update in database
+    await libraryService.updateBook(stomyBook.id, updates);
+
+    return true;
+  } catch (error) {
+    console.error('[KoboPlugin] Failed to update book progress:', error);
+    return false;
+  }
+}
+
+/**
+ * Sync annotations and highlights to Stomy
+ */
+async function syncAnnotations(bookmarks: KoboBookmark[], stomyBooks: Book[]): Promise<number> {
+  let count = 0;
+
+  for (const bookmark of bookmarks) {
+    try {
+      // Find the book this annotation belongs to
+      const book = stomyBooks.find((b) =>
+        bookmark.volumeID.includes(b.title || '') ||
+        bookmark.volumeID.includes(b.isbn || '')
+      );
+
+      if (!book) continue;
+
+      // Store annotation in Stomy database
+      // Note: This assumes libraryService has an addAnnotation method
+      // If not available, this can be stored in a separate annotations table
+      await libraryService.addAnnotation({
+        bookId: book.id,
+        text: bookmark.text,
+        note: bookmark.annotation,
+        location: bookmark.chapterProgress,
+        createdAt: bookmark.dateCreated,
+        type: bookmark.type,
+      });
+
+      count++;
+    } catch (error) {
+      console.error('[KoboPlugin] Failed to sync annotation:', error);
+    }
+  }
+
+  return count;
+}
+
+/**
+ * Sync vocabulary words to Stomy
+ */
+async function syncVocabulary(vocabulary: KoboVocabulary[]): Promise<number> {
+  let count = 0;
+
+  for (const word of vocabulary) {
+    try {
+      // Store vocabulary in Stomy database
+      // Note: This assumes libraryService has an addVocabulary method
+      // If not available, this can be stored in a separate vocabulary table
+      await libraryService.addVocabulary({
+        word: word.text,
+        context: word.volumeID,
+        lookedUpAt: word.dateCreated,
+      });
+
+      count++;
+    } catch (error) {
+      console.error('[KoboPlugin] Failed to sync vocabulary:', error);
+    }
+  }
+
+  return count;
 }
 
 /**

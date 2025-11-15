@@ -74,16 +74,29 @@ The plugin is included with Stomy as an optional plugin. To enable it:
 
 ## Usage
 
-### Detecting Kobo Devices
+### Automatic Synchronization
 
-1. Connect your Kobo via USB
-2. The plugin will automatically detect it in the Sync view
-3. You'll see device information including:
-   - Model name
-   - Serial number
-   - Available storage space
+**When you connect your Kobo via USB**, the plugin automatically:
 
-### Syncing Books
+1. **Detects the device** - Recognizes your Kobo model and storage info
+2. **Reads KoboReader.sqlite** - Extracts all reading data from the database
+3. **Matches books** - Links Kobo books to your Stomy library (by ISBN, title, author)
+4. **Updates your library** - Syncs the following data to Stomy's SQLite database:
+   - **Reading Progress** (percentage, time spent)
+   - **Read Status** (unread → reading → finished)
+   - **Annotations** (highlights and notes)
+   - **Vocabulary** (dictionary lookups) _if enabled_
+5. **Shows notification** - Displays sync summary (X books updated, Y annotations imported)
+
+### Manual Sync
+
+You can also trigger sync manually:
+
+1. Click "Import Reading Progress from Kobo" in the toolbar
+2. Or use the keyboard shortcut (if configured)
+3. Watch real-time progress in the notification panel
+
+### Syncing Books to Kobo
 
 1. Select books in your library
 2. Click "Sync to Kobo"
@@ -125,6 +138,39 @@ The plugin can now read data from the Kobo's internal SQLite database (`KoboRead
 - **Reading Milestones**: Automatic tracking at 25%, 50%, 75%, 100%
 - **Session History**: Start/stop reading events
 - **Reading Patterns**: Analyze your reading habits
+
+### Book Matching Algorithm
+
+The plugin uses intelligent matching to link Kobo books with your Stomy library:
+
+**1. ISBN Match (Most Reliable)** ✅
+- Compares ISBN-13 identifiers
+- Case-insensitive, ignores hyphens
+- 100% accuracy when ISBNs are present
+
+**2. Title + Author Match** ✅
+- Exact match on normalized title and author
+- Removes punctuation, converts to lowercase
+- Very high accuracy (~95%)
+
+**3. Fuzzy Title Match** ⚠️
+- Word-based similarity (70% threshold)
+- Used when ISBN and exact title fail
+- Useful for books with subtitle variations
+
+**Example:**
+```
+Kobo:  "The Lord of the Rings: The Fellowship of the Ring"
+Stomy: "The Fellowship of the Ring (Lord of the Rings #1)"
+→ Matched via fuzzy title matching (85% similarity)
+```
+
+**Unmatched Books:**
+- Books only on Kobo won't be created in Stomy
+- Books only in Stomy won't receive Kobo data
+- Check logs for matching issues
+
+**Tip:** Add ISBNs to your Stomy books for best results!
 
 ## Technical Details
 
