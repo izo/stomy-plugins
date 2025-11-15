@@ -112,7 +112,7 @@ Some plugins (like `epub-to-pdf`) include Rust modules:
 
 ### Production Plugins
 - **csv-export**: Export library to CSV (implements ExportPlugin interface)
-- **kobo-sync**: USB sync to Kobo e-readers (enabled by default)
+- **kobo-sync**: USB sync to Kobo e-readers with reading progress import from KoboReader.sqlite
 - **kindle-sync**: USB sync to Kindle devices with EPUB→MOBI conversion
 - **epub-to-pdf**: Convert EPUB books to PDF with configurable settings
 - **nav-tags**: Tag-based navigation with sidebar integration (purple tab)
@@ -150,7 +150,7 @@ Settings are defined in the plugin's `settings` property and typed with an inter
   - Icon names follow pattern: `[Name][Regular|Filled]`
   - See https://react.fluentui.dev/?path=/docs/icons-catalog--docs
 - **Versioning**: Follow semantic versioning for plugin versions
-- **Enabled by default**: Only kobo-sync is enabled by default (most plugins are `enabled: false`)
+- **Enabled by default**: Most plugins are `enabled: false` by default and must be enabled by the user
 
 ## Assets Directory
 

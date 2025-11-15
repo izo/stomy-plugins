@@ -1,0 +1,81 @@
+{
+  "id": "kobo-sync",
+  "name": "Kobo Sync",
+  "version": "2.0.0",
+  "description": "Synchronize your ebook library with Kobo e-reader devices via USB. Import reading progress, annotations, and vocabulary from KoboReader.sqlite database.",
+  "author": "Stomy Team",
+  "license": "MIT",
+  "icon": "BookOpen24Regular",
+  "homepage": "https://github.com/izo/stomy-plugins",
+  "repository": "https://github.com/izo/stomy-plugins/tree/main/optional/kobo-sync",
+
+  "main": "index.ts",
+  "permissions": ["fs:read", "fs:write", "tauri:*"],
+  "dependencies": {},
+
+  "categories": ["sync", "device"],
+  "tags": ["kobo", "sync", "usb", "epub", "e-reader"],
+
+  "settings": {
+    "targetFolder": {
+      "type": "string",
+      "default": "Stomy",
+      "description": "Base folder on Kobo device for synced books (default: Stomy)"
+    },
+    "showNotifications": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show notifications when syncing"
+    },
+    "autoEject": {
+      "type": "boolean",
+      "default": false,
+      "description": "Automatically eject device after sync"
+    },
+    "syncMetadata": {
+      "type": "boolean",
+      "default": true,
+      "description": "Sync metadata along with books"
+    },
+    "syncReadingProgress": {
+      "type": "boolean",
+      "default": true,
+      "description": "Import reading progress from Kobo database (percent read, time spent, read status)"
+    },
+    "syncAnnotations": {
+      "type": "boolean",
+      "default": true,
+      "description": "Import highlights and annotations from Kobo"
+    },
+    "syncVocabulary": {
+      "type": "boolean",
+      "default": false,
+      "description": "Import vocabulary/dictionary lookups from Kobo"
+    },
+    "useLibraryFolders": {
+      "type": "boolean",
+      "default": true,
+      "description": "Create separate subfolders for each library (e.g., Stomy/Romans/, Stomy/Science/)"
+    },
+    "libraryFolderPrefix": {
+      "type": "string",
+      "default": "",
+      "description": "Optional prefix for library folder names (e.g., 'Lib-' creates Stomy/Lib-Romans/)"
+    }
+  },
+
+  "actions": [
+    {
+      "id": "sync-device",
+      "label": "Sync to Kobo",
+      "icon": "RefreshCw",
+      "context": "library"
+    },
+    {
+      "id": "detect-device",
+      "label": "Detect Kobo Device",
+      "icon": "Search",
+      "context": "settings"
+    }
+  ]
+}
