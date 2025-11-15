@@ -18,13 +18,40 @@ Plugin for synchronizing ebooks with Kobo e-reader devices via USB connection.
 ## Supported Devices
 
 All Kobo e-reader models with USB mass storage support:
-- Kobo Clara
-- Kobo Libra
-- Kobo Forma
-- Kobo Aura
-- Kobo Glo
-- Kobo Touch
-- Older Kobo models
+
+### 2024-2025 Models
+- **Kobo Clara BW** (N365/N365B/P365) - Black & white, repairable
+- **Kobo Clara Colour** (N367) - Color Kaleido 3 display
+- **Kobo Libra Colour** (N428) - 7" color display
+
+### 2021-2023 Models
+- **Kobo Elipsa 2E** (N605) - 10.3" note-taking device
+- **Kobo Clara 2E** (N506) - Eco-friendly model
+- **Kobo Sage** (N778/N778K) - 8" premium model
+- **Kobo Libra 2** (N418) - 7" with physical buttons
+- **Kobo Elipsa** (N604) - First gen note-taking
+
+### 2017-2020 Models
+- **Kobo Nia** (N306) - Entry-level
+- **Kobo Libra H2O** (N873) - Waterproof 7"
+- **Kobo Forma** (N782) - 8" large screen
+- **Kobo Clara HD** (N249) - Compact 6"
+
+### Legacy Models (2012-2017)
+- **Kobo Aura H2O Edition 2** (N867)
+- **Kobo Aura ONE** (N709) - First 7.8" model
+- **Kobo Aura Edition 2** (N236)
+- **Kobo Touch 2.0** (N587)
+- **Kobo Glo HD** (N437)
+- **Kobo Aura H2O** (N250)
+- **Kobo Aura** (N514)
+- **Kobo Aura HD** (N204B)
+- **Kobo Glo** (N613)
+- **Kobo Touch** (N905/N905B/N905C) - Original
+
+**Note:** All models listed support USB Mass Storage and contain the `KoboReader.sqlite` database with reading progress, annotations, and vocabulary data.
+
+**Windows 11 Compatibility:** Some legacy models (Aura Edition 2, Touch 2.0, Glo HD, Aura ONE) may have limited Windows 11 support. macOS and Linux work with all models.
 
 ## Supported Formats
 
@@ -37,12 +64,13 @@ All Kobo e-reader models with USB mass storage support:
 
 ## Installation
 
-The plugin is included with Stomy and enabled by default. To disable it:
+The plugin is included with Stomy as an optional plugin. To enable it:
 
 1. Open Stomy
 2. Go to Settings → Plugins
 3. Find "Kobo Sync" in the plugin list
-4. Click "Disable" if you don't use Kobo devices
+4. Click "Enable" to activate Kobo device support
+5. Configure sync settings (reading progress, annotations, vocabulary)
 
 ## Usage
 
