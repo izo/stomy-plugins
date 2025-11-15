@@ -34,13 +34,15 @@ export const koboPlugin: Plugin = {
   permissions: ['fs:read', 'fs:write', 'tauri:*'],
 
   settings: {
-    targetFolder: '.kobo',
+    targetFolder: 'Stomy',
     showNotifications: true,
     autoEject: false,
     syncMetadata: true,
     syncReadingProgress: true,
     syncAnnotations: true,
     syncVocabulary: false,
+    useLibraryFolders: true, // Create a subfolder per library
+    libraryFolderPrefix: '', // No prefix by default
   } as KoboPluginSettings,
 
   // Lifecycle hooks
@@ -224,23 +226,59 @@ export async function copyFileToKobo(
 }
 
 /**
- * Sync a book to Kobo
+ * Get target folder path for a library on Kobo
+ */
+export function getLibraryFolderPath(
+  koboDevicePath: string,
+  settings: KoboPluginSettings,
+  libraryName?: string
+): string {
+  const basePath = `${koboDevicePath}/${settings.targetFolder}`;
+
+  // If library folders are disabled, return base path
+  if (!settings.useLibraryFolders || !libraryName) {
+    return basePath;
+  }
+
+  // Create library-specific folder
+  const prefix = settings.libraryFolderPrefix || '';
+  const libraryFolder = `${prefix}${libraryName}`.replace(/[/\\:*?"<>|]/g, '-'); // Sanitize folder name
+
+  return `${basePath}/${libraryFolder}`;
+}
+
+/**
+ * Sync a book to Kobo (with multi-library support)
  */
 export async function syncBookToKobo(
   bookPath: string,
   bookTitle: string,
   koboDevicePath: string,
-  settings: KoboPluginSettings
+  settings: KoboPluginSettings,
+  libraryName?: string
 ): Promise<SyncResult> {
   try {
-    // Kobo natively supports EPUB, PDF, and other formats
-    await copyFileToKobo(bookPath, koboDevicePath, bookTitle);
+    // Get target folder (may include library subfolder)
+    const targetFolder = getLibraryFolderPath(koboDevicePath, settings, libraryName);
 
-    return { success: true, booksSynced: 1 };
+    // Create library folder if needed
+    if (settings.useLibraryFolders && libraryName) {
+      await invoke('create_directory', { path: targetFolder });
+    }
+
+    // Copy book to target folder
+    await copyFileToKobo(bookPath, targetFolder, bookTitle);
+
+    return {
+      success: true,
+      booksSynced: 1,
+      libraryName,
+    };
   } catch (error) {
     return {
       success: false,
       error: error instanceof Error ? error.message : String(error),
+      libraryName,
     };
   }
 }

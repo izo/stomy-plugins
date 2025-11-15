@@ -14,6 +14,7 @@ Plugin for synchronizing ebooks with Kobo e-reader devices via USB connection.
 - 📚 **Vocabulary Tracking** - Import dictionary lookups for language learning
 - 🗄️ **Database Access** - Full read access to KoboReader.sqlite database
 - 📈 **Reading Statistics** - Track your reading habits with detailed events
+- 🗂️ **Multi-Library Support** - Organize books by Stomy library (e.g., `/Stomy/Romans/`, `/Stomy/Science/`)
 
 ## Supported Devices
 
@@ -105,13 +106,23 @@ You can also trigger sync manually:
 
 ### Plugin Settings
 
-- **Target Folder**: Kobo folder to sync to (default: .kobo)
+**Folder Organization:**
+- **Target Folder**: Base folder on Kobo (default: `Stomy`)
+- **Use Library Folders**: Create subfolders per library (default: enabled)
+  - Enabled: `/Stomy/Romans/`, `/Stomy/Science/`
+  - Disabled: `/Stomy/` (all books together)
+- **Library Folder Prefix**: Optional prefix for library folders (default: none)
+
+**Sync Options:**
 - **Show Notifications**: Display system notifications for sync events (default: enabled)
 - **Auto Eject**: Automatically eject device after sync (default: disabled)
 - **Sync Metadata**: Sync book metadata to Kobo database (default: enabled)
 - **Sync Reading Progress**: Import reading progress from Kobo (default: enabled)
 - **Sync Annotations**: Import highlights and annotations (default: enabled)
 - **Sync Vocabulary**: Import vocabulary/dictionary lookups (default: disabled)
+
+**📘 Multi-Library Support:**
+If you use multiple libraries in Stomy (e.g., "Romans", "Science", "Jeunesse"), books will be organized in separate folders on your Kobo. See [MULTI_LIBRARY.md](./MULTI_LIBRARY.md) for details.
 
 ### Reading Progress Features
 

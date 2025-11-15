@@ -19,19 +19,43 @@ export interface KoboInfo {
 }
 
 export interface KoboPluginSettings {
-  targetFolder: string; // Default: .kobo folder
+  targetFolder: string; // Default: Stomy (base folder on Kobo)
   showNotifications: boolean;
   autoEject: boolean;
   syncMetadata: boolean;
   syncReadingProgress: boolean; // Sync reading progress from Kobo
   syncAnnotations: boolean; // Sync highlights and annotations
   syncVocabulary: boolean; // Sync vocabulary/dictionary lookups
+  useLibraryFolders: boolean; // Create separate folders per library (default: true)
+  libraryFolderPrefix: string; // Prefix for library folders (default: none)
 }
 
 export interface SyncResult {
   success: boolean;
   booksSynced?: number;
   error?: string;
+  libraryId?: string; // ID of the library being synced
+  libraryName?: string; // Name of the library
+}
+
+/**
+ * Library information from Stomy
+ */
+export interface StomyLibrary {
+  id: string;
+  name: string;
+  path?: string; // Optional: physical path on disk
+}
+
+/**
+ * Sync options for multi-library support
+ */
+export interface KoboSyncOptions {
+  devicePath: string;
+  libraryId?: string; // Sync specific library only
+  libraryName?: string; // Library name for folder creation
+  targetFolder?: string; // Override default target folder
+  onProgress?: (stats: KoboSyncStats) => void;
 }
 
 // ============================================================================

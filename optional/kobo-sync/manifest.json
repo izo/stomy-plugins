@@ -19,8 +19,8 @@
   "settings": {
     "targetFolder": {
       "type": "string",
-      "default": ".kobo",
-      "description": "Target folder on Kobo device for synced books"
+      "default": "Stomy",
+      "description": "Base folder on Kobo device for synced books (default: Stomy)"
     },
     "showNotifications": {
       "type": "boolean",
@@ -51,6 +51,16 @@
       "type": "boolean",
       "default": false,
       "description": "Import vocabulary/dictionary lookups from Kobo"
+    },
+    "useLibraryFolders": {
+      "type": "boolean",
+      "default": true,
+      "description": "Create separate subfolders for each library (e.g., Stomy/Romans/, Stomy/Science/)"
+    },
+    "libraryFolderPrefix": {
+      "type": "string",
+      "default": "",
+      "description": "Optional prefix for library folder names (e.g., 'Lib-' creates Stomy/Lib-Romans/)"
     }
   },
 
