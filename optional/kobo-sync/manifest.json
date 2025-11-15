@@ -7,7 +7,7 @@
   "license": "MIT",
   "icon": "BookOpen24Regular",
   "homepage": "https://github.com/izo/stomy-plugins",
-  "repository": "https://github.com/izo/stomy-plugins/tree/main/kobo-sync",
+  "repository": "https://github.com/izo/stomy-plugins/tree/main/optional/kobo-sync",
 
   "main": "index.ts",
   "permissions": ["fs:read", "fs:write", "tauri:*"],

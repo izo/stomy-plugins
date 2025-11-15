@@ -176,7 +176,7 @@ npm run tauri dev
 ### Importing Reading Progress
 
 ```typescript
-import { getKoboLibraryData, formatReadingTime } from './core/kobo-sync';
+import { getKoboLibraryData, formatReadingTime } from './optional/kobo-sync';
 
 // Get all data from connected Kobo
 const libraryData = await getKoboLibraryData('/Volumes/KOBOeReader');
@@ -201,7 +201,7 @@ libraryData.bookmarks.forEach(bookmark => {
 ### Checking Progress for Specific Book
 
 ```typescript
-import { getBookProgress } from './core/kobo-sync';
+import { getBookProgress } from './optional/kobo-sync';
 
 // By ISBN
 const progress = await getBookProgress(
@@ -224,7 +224,7 @@ if (progress) {
 ### Syncing to Stomy Library
 
 ```typescript
-import { syncReadingProgress } from './core/kobo-sync';
+import { syncReadingProgress } from './optional/kobo-sync';
 
 const stats = await syncReadingProgress(
   '/Volumes/KOBOeReader',

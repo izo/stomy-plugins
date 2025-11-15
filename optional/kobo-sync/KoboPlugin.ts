@@ -26,7 +26,7 @@ export const koboPlugin: Plugin = {
   version: '2.0.0',
   author: 'Stomy Team',
   icon: 'BookOpen',
-  enabled: true, // Enabled by default since it's the primary device
+  enabled: false, // Optional plugin - enable if you use Kobo devices
 
   permissions: ['fs:read', 'fs:write', 'tauri:*'],
 

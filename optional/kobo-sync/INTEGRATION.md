@@ -23,7 +23,7 @@ tauri = { version = "2.0", features = ["protocol-asset"] }
 Copy the `kobo_db.rs` file to your Tauri backend:
 
 ```bash
-cp core/kobo-sync/kobo_db.rs src-tauri/src/plugins/kobo_db.rs
+cp optional/kobo-sync/kobo_db.rs src-tauri/src/plugins/kobo_db.rs
 ```
 
 ### 2. Update `src-tauri/src/main.rs`
