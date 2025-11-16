@@ -230,8 +230,8 @@ export const themeManagerPlugin: Plugin = {
   // === Metadata ===
   id: 'theme-manager',
   name: 'Theme Manager',
-  description: 'Gestion des thèmes de couleurs et de typographie pour l\'application',
-  version: '1.0.0',
+  description: '9 thèmes populaires (Nord, Dracula, Catppuccin, Atom One, Material, Vue, Lumon, Cyberpunk 2077, Neon Cyberpunk) avec modes clair/sombre',
+  version: '2.0.0',
   author: 'Stomy Team',
   icon: 'ColorRegular',
   repository: 'https://github.com/izo/stomy-plugins',

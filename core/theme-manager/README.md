@@ -4,15 +4,15 @@ Un système de gestion de thèmes complet pour Stomy, permettant de personnalise
 
 ## 🎨 Caractéristiques
 
-- **Thèmes complets** : Couleurs et typographie pour toute l'application
-- **Mode sombre** : Chaque thème inclut une variante sombre
-- **Thème Nord** : Premier thème basé sur [Nord Theme](https://www.nordtheme.com/)
+- **9 thèmes populaires** : Nord, Dracula, Catppuccin, Atom One, Material, Vue, Lumon, Cyberpunk 2077, Neon Cyberpunk
+- **Modes clair & sombre** : Chaque thème inclut une variante light et dark
 - **Auto-switch** : Synchronisation automatique avec les préférences système
-- **CSS Variables** : Application via variables CSS pour une intégration facile
-- **Transitions** : Animations fluides lors des changements de thème
+- **40+ variables CSS** : Couleurs, typographie, espacements
+- **Crédits complets** : Tous les thèmes incluent les attributions et sources
+- **Transitions fluides** : Animations configurables lors des changements
 - **Accessibilité** : Options de contraste élevé et mouvement réduit
 - **CSS personnalisé** : Possibilité d'ajouter des règles CSS personnalisées
-- **Sidebar** : Interface dédiée pour gérer les thèmes
+- **Sidebar dédiée** : Interface pour gérer et prévisualiser les thèmes
 
 ## 📦 Installation
 
@@ -23,7 +23,65 @@ import { themeManagerPlugin } from './core/theme-manager';
 await pluginManager.registerPlugin(themeManagerPlugin);
 ```
 
-## 🎯 Thème Nord
+## 🎨 Thèmes disponibles
+
+Le plugin inclut 9 thèmes soigneusement sélectionnés, chacun avec une variante claire et sombre :
+
+### 1. **Nord** (Défaut)
+- **Auteur** : Arctic Ice Studio
+- **Source** : [nordtheme.com](https://www.nordtheme.com/)
+- **Description** : Palette arctique avec des tons bleus apaisants
+- **Tags** : cool, blue, professional, arctic
+
+### 2. **Dracula**
+- **Auteur** : Zeno Rocha
+- **Source** : [draculatheme.com](https://draculatheme.com/)
+- **Description** : Thème sombre avec des couleurs vibrantes
+- **Tags** : dark, vibrant, purple, popular
+
+### 3. **Catppuccin Frappé**
+- **Auteur** : Catppuccin
+- **Source** : [github.com/catppuccin/catppuccin](https://github.com/catppuccin/catppuccin)
+- **Description** : Thème pastel apaisant avec des couleurs subtiles
+- **Tags** : pastel, soothing, purple, popular
+
+### 4. **Atom One**
+- **Auteur** : GitHub/Atom
+- **Source** : [github.com/atom/one-light-syntax](https://github.com/atom/one-light-syntax)
+- **Description** : Thème professionnel et épuré
+- **Tags** : professional, clean, popular
+
+### 5. **Material**
+- **Auteur** : Mattia Astorino
+- **Source** : [github.com/material-theme/vsc-material-theme](https://github.com/material-theme/vsc-material-theme)
+- **Description** : Basé sur le Material Design de Google
+- **Tags** : material-design, google, teal, popular
+
+### 6. **Vue**
+- **Auteur** : Mario Rodeghiero
+- **Source** : [github.com/mariorodeghiero/vue-theme-vscode](https://github.com/mariorodeghiero/vue-theme-vscode)
+- **Description** : Inspiré par l'identité visuelle de Vue.js
+- **Tags** : vue, green, cyan, framework
+
+### 7. **Lumon**
+- **Auteur** : Conner Luzier
+- **Source** : [VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=cluzier.lumon)
+- **Description** : Esthétique corporate froide inspirée de la série Severance
+- **Tags** : severance, corporate, teal, cold
+
+### 8. **Cyberpunk 2077**
+- **Auteur** : Endormi
+- **Source** : [github.com/endormi/vscode-2077-theme](https://github.com/endormi/vscode-2077-theme)
+- **Description** : Néons inspirés du jeu Cyberpunk 2077
+- **Tags** : cyberpunk, neon, futuristic, gaming
+
+### 9. **Neon Cyberpunk**
+- **Auteur** : Roboron3042
+- **Source** : [github.com/Roboron3042/Cyberpunk-Neon](https://github.com/Roboron3042/Cyberpunk-Neon)
+- **Description** : Thème cyberpunk à fort contraste avec néons vibrants
+- **Tags** : cyberpunk, neon, vibrant, high-contrast
+
+## 🎯 Thème Nord (Détails)
 
 Le thème Nord est une palette de couleurs arctique, nord-bluish, conçue pour un environnement de travail agréable et productif.
 
