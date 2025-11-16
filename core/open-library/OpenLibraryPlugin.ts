@@ -7,8 +7,8 @@ import type {
   OpenLibraryAuthor,
   EnrichedMetadata,
 } from './types';
-import { notificationService } from '@/services/notificationService';
-import { libraryService } from '@/services/libraryService';
+import { notificationService } from '../../../../services/notificationService';
+import { libraryService } from '../../../../services/libraryService';
 
 const OPEN_LIBRARY_API = 'https://openlibrary.org';
 const COVERS_API = 'https://covers.openlibrary.org/b';
