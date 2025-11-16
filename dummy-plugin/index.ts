@@ -10,7 +10,7 @@
  */
 
 import type { Plugin } from '../types';
-import { notificationService } from '@/services/notificationService';
+import { notificationService } from '../../../services/notificationService';
 
 interface DocPluginSettings {
   exampleCounter: number;

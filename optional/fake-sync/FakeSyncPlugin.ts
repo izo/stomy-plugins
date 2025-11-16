@@ -4,7 +4,7 @@
  */
 
 import type { Plugin } from '../types';
-import { notificationService } from '@/services/notificationService';
+import { notificationService } from '../../../../services/notificationService';
 import type {
   FakeDevice,
   FakeSyncSettings,

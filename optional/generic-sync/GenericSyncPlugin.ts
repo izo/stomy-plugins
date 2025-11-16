@@ -6,8 +6,8 @@ import type {
   DeviceType,
   SyncResult,
 } from './types';
-import { notificationService } from '@/services/notificationService';
-import { libraryService } from '@/services/libraryService';
+import { notificationService } from '../../../../services/notificationService';
+import { libraryService } from '../../../../services/libraryService';
 import { invoke } from '@tauri-apps/api/core';
 import { open } from '@tauri-apps/plugin-dialog';
 
