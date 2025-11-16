@@ -4,8 +4,8 @@
  */
 
 import type { Plugin } from '../types';
-import { notificationService } from '../../services/notificationService';
-import { libraryService } from '../../services/libraryService';
+import { notificationService } from '@/services/notificationService';
+import { libraryService } from '@/services/libraryService';
 import type { NavTagsSettings, Tag, TagStats } from './types';
 
 const LOG_PREFIX = '[NavTags]';
