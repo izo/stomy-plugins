@@ -105,6 +105,9 @@ export interface Theme {
  * Theme manager plugin settings
  */
 export interface ThemeManagerSettings {
+  // Settings version for migration purposes
+  settingsVersion?: number;
+
   // Current theme ID
   currentTheme: string;
 

@@ -5,6 +5,7 @@
 
 export * from './types';
 export * from './themes';
+export * from './customThemes';
 export * from './ThemeManagerPlugin';
 export {
   themeManagerPlugin as default,
@@ -12,4 +13,11 @@ export {
   applyColorPalette,
   applyTypography,
   getSystemDarkMode,
+  validateCustomCss,
+  validateSettings,
+  previewTheme,
+  importTheme,
+  migrateSettings,
+  trackEvent,
+  reloadCustomThemes,
 } from './ThemeManagerPlugin';

@@ -6,7 +6,11 @@
 import type { Theme, ColorPalette, Typography } from './types';
 
 /**
- * Default typography settings (shared across all themes)
+ * Default typography settings (shared across most themes)
+ *
+ * NOTE: Each theme can have its own custom typography by creating a
+ * new Typography object instead of using defaultTypography.
+ * See cyberpunkTypography for an example.
  */
 const defaultTypography: Typography = {
   fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
@@ -32,6 +36,36 @@ const defaultTypography: Typography = {
   letterSpacingTight: '-0.025em',
   letterSpacingNormal: '0',
   letterSpacingWide: '0.025em',
+};
+
+/**
+ * Custom typography for Cyberpunk themes
+ * Uses wider letter spacing and slightly different sizes for a futuristic feel
+ */
+const cyberpunkTypography: Typography = {
+  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+  fontFamilyMono: '"Fira Code", "JetBrains Mono", "Cascadia Code", "SF Mono", Monaco, monospace',
+
+  fontSizeXs: '0.75rem',   // 12px
+  fontSizeSm: '0.875rem',  // 14px
+  fontSizeMd: '1rem',      // 16px
+  fontSizeLg: '1.125rem',  // 18px
+  fontSizeXl: '1.375rem',  // 22px (slightly larger)
+  fontSize2xl: '1.75rem',  // 28px (slightly larger)
+  fontSize3xl: '2.25rem',  // 36px (larger for impact)
+
+  lineHeightTight: '1.2',  // Tighter for compact feel
+  lineHeightNormal: '1.5',
+  lineHeightRelaxed: '1.75',
+
+  fontWeightNormal: '400',
+  fontWeightMedium: '500',
+  fontWeightSemibold: '600',
+  fontWeightBold: '700',
+
+  letterSpacingTight: '0',
+  letterSpacingNormal: '0.025em',  // Wider for cyberpunk aesthetic
+  letterSpacingWide: '0.075em',    // Extra wide
 };
 
 // ============================================================================
@@ -668,7 +702,7 @@ export const cyberpunk2077Theme: Theme = {
   version: '1.0.0',
   light: cyberpunk2077LightPalette,
   dark: cyberpunk2077DarkPalette,
-  typography: defaultTypography,
+  typography: cyberpunkTypography,
   tags: ['cyberpunk', 'neon', 'futuristic', 'gaming'],
 };
 
@@ -746,7 +780,7 @@ export const neonCyberpunkTheme: Theme = {
   version: '1.0.0',
   light: neonCyberpunkLightPalette,
   dark: neonCyberpunkDarkPalette,
-  typography: defaultTypography,
+  typography: cyberpunkTypography,
   tags: ['cyberpunk', 'neon', 'vibrant', 'high-contrast'],
 };
 
@@ -760,9 +794,9 @@ export const neonCyberpunkTheme: Theme = {
 export const DEFAULT_THEME = nordTheme;
 
 /**
- * All available themes
+ * Built-in themes (hardcoded in the plugin)
  */
-export const THEMES: Theme[] = [
+export const BUILTIN_THEMES: Theme[] = [
   nordTheme,
   draculaTheme,
   catppuccinTheme,
@@ -773,6 +807,40 @@ export const THEMES: Theme[] = [
   cyberpunk2077Theme,
   neonCyberpunkTheme,
 ];
+
+/**
+ * Custom themes (loaded from user's AppData directory)
+ * This array is populated dynamically on plugin load
+ */
+let customThemes: Theme[] = [];
+
+/**
+ * All available themes (built-in + custom)
+ */
+export let THEMES: Theme[] = [...BUILTIN_THEMES];
+
+/**
+ * Set custom themes (called after loading from files)
+ */
+export function setCustomThemes(themes: Theme[]): void {
+  customThemes = themes;
+  THEMES = [...BUILTIN_THEMES, ...customThemes];
+  console.log(`[ThemeRegistry] Updated THEMES: ${BUILTIN_THEMES.length} built-in + ${customThemes.length} custom`);
+}
+
+/**
+ * Get all custom themes
+ */
+export function getCustomThemes(): Theme[] {
+  return customThemes;
+}
+
+/**
+ * Check if a theme is custom (not built-in)
+ */
+export function isCustomTheme(themeId: string): boolean {
+  return customThemes.some(theme => theme.id === themeId);
+}
 
 /**
  * Get theme by ID

@@ -4,15 +4,21 @@ Un système de gestion de thèmes complet pour Stomy, permettant de personnalise
 
 ## 🎨 Caractéristiques
 
-- **9 thèmes populaires** : Nord, Dracula, Catppuccin, Atom One, Material, Vue, Lumon, Cyberpunk 2077, Neon Cyberpunk
+### Thèmes
+- **9 thèmes populaires intégrés** : Nord, Dracula, Catppuccin, Atom One, Material, Vue, Lumon, Cyberpunk 2077, Neon Cyberpunk
+- **Import/Export de thèmes personnalisés** : Créez et partagez vos propres thèmes
+- **Stockage dans AppData** : Thèmes personnalisés sauvegardés localement en JSON
 - **Modes clair & sombre** : Chaque thème inclut une variante light et dark
+
+### Fonctionnalités
 - **Auto-switch** : Synchronisation automatique avec les préférences système
+- **Prévisualisation** : Testez un thème temporairement (5s) avant de l'appliquer
 - **40+ variables CSS** : Couleurs, typographie, espacements
-- **Crédits complets** : Tous les thèmes incluent les attributions et sources
-- **Transitions fluides** : Animations configurables lors des changements
+- **Transitions fluides** : Animations configurables avec throttling
 - **Accessibilité** : Options de contraste élevé et mouvement réduit
-- **CSS personnalisé** : Possibilité d'ajouter des règles CSS personnalisées
+- **CSS personnalisé** : Ajout de règles CSS avec validation de sécurité
 - **Sidebar dédiée** : Interface pour gérer et prévisualiser les thèmes
+- **Analytics optionnel** : Tracking des changements de thèmes
 
 ## 📦 Installation
 
@@ -110,6 +116,47 @@ Le thème Nord est une palette de couleurs arctique, nord-bluish, conçue pour u
 - `#ebcb8b` - Jaune
 - `#a3be8c` - Vert
 - `#b48ead` - Violet
+
+## 📁 Stockage des thèmes
+
+### Thèmes intégrés (built-in)
+Les 9 thèmes par défaut sont hardcodés dans `/core/theme-manager/themes.ts`. Ils ne peuvent pas être modifiés ou supprimés.
+
+### Thèmes personnalisés (custom)
+Les thèmes importés par l'utilisateur sont sauvegardés dans :
+
+**Chemin** : `~/.stomy/themes/` (AppData)
+
+```
+~/.stomy/themes/
+├── my-custom-theme.json
+├── imported-theme-1.json
+└── shared-theme-abc.json
+```
+
+Chaque fichier JSON contient un objet `Theme` complet avec toutes les propriétés requises.
+
+### Import/Export de thèmes
+
+**Export** :
+1. Allez dans Settings > Theme Manager
+2. Cliquez sur "Exporter le thème actuel"
+3. Le JSON est copié dans le presse-papiers
+4. Partagez-le avec d'autres utilisateurs
+
+**Import** :
+1. Copiez le JSON du thème dans le presse-papiers
+2. Allez dans Settings > Theme Manager
+3. Cliquez sur "Importer un thème (presse-papiers)"
+4. Le thème est validé, sauvegardé dans `~/.stomy/themes/` et ajouté à la liste
+
+**Suppression** :
+1. Sélectionnez un thème personnalisé
+2. Cliquez sur "Supprimer le thème actuel (si personnalisé)"
+3. Confirmez la suppression
+4. Le fichier JSON est supprimé et le thème est retiré de la liste
+
+Note : Les thèmes intégrés ne peuvent pas être supprimés.
 
 ## 🔧 Utilisation
 
@@ -350,6 +397,88 @@ Le plugin supporte plusieurs fonctionnalités d'accessibilité :
 - **Mouvement réduit** : Désactive les animations
 - **Synchronisation système** : Respecte les préférences système
 - **Classes CSS dédiées** : `.high-contrast`, `.reduced-motion`, `.dark`
+
+## 🔌 API programmatique
+
+Le plugin exporte plusieurs fonctions pour une utilisation programmatique :
+
+### Gestion des thèmes personnalisés
+
+```typescript
+import {
+  saveCustomTheme,
+  loadCustomTheme,
+  loadAllCustomThemes,
+  deleteCustomTheme,
+  listCustomThemeIds,
+  isCustomTheme,
+  exportThemeToJson,
+  reloadCustomThemes,
+} from '@/core/theme-manager';
+
+// Sauvegarder un thème personnalisé
+await saveCustomTheme(myTheme);
+
+// Charger un thème spécifique
+const result = await loadCustomTheme('my-theme-id');
+if (result.success) {
+  console.log(result.theme);
+}
+
+// Charger tous les thèmes personnalisés
+const customThemes = await loadAllCustomThemes();
+
+// Supprimer un thème
+await deleteCustomTheme('theme-id');
+
+// Lister les IDs des thèmes personnalisés
+const ids = await listCustomThemeIds();
+
+// Vérifier si un thème est personnalisé
+const isCustom = await isCustomTheme('theme-id');
+
+// Exporter un thème en JSON
+const json = exportThemeToJson(theme, isDarkMode);
+
+// Recharger les thèmes depuis le disque
+await reloadCustomThemes();
+```
+
+### Autres fonctions utiles
+
+```typescript
+import {
+  previewTheme,
+  importTheme,
+  validateCustomCss,
+  validateSettings,
+  migrateSettings,
+  trackEvent,
+} from '@/core/theme-manager';
+
+// Prévisualiser un thème pendant 5 secondes
+const preview = previewTheme('dracula', true, 5000);
+// Annuler la prévisualisation
+preview.cancel();
+
+// Importer un thème depuis JSON
+const result = await importTheme(jsonString);
+
+// Valider du CSS personnalisé
+const validation = validateCustomCss('.my-class { color: red; }');
+if (!validation.valid) {
+  console.error(validation.error);
+}
+
+// Valider les settings
+const validatedSettings = validateSettings(rawSettings);
+
+// Migrer des settings d'une ancienne version
+const migratedSettings = migrateSettings(oldSettings);
+
+// Tracker un événement (analytics)
+trackEvent('custom_event', { key: 'value' });
+```
 
 ## 🐛 Débogage
 
