@@ -173,6 +173,25 @@
       "tags": ["development", "testing", "sync", "simulation", "debug"],
       "homepage": "https://github.com/izo/stomy-plugins",
       "enabled": false
+    },
+    {
+      "id": "theme-manager",
+      "name": "Theme Manager",
+      "description": "9 thèmes populaires (Nord, Dracula, Catppuccin, Atom One, Material, Vue, Lumon, Cyberpunk 2077, Neon Cyberpunk) avec modes clair/sombre. 40+ variables CSS pour une personnalisation complète.",
+      "version": "2.0.0",
+      "author": "Stomy Team",
+      "icon": "ColorRegular",
+      "repository": "https://github.com/izo/stomy-plugins/tree/main/core/theme-manager",
+      "downloads": 0,
+      "stars": 0,
+      "lastUpdate": "2025-11-16T12:00:00Z",
+      "createdAt": "2025-11-16T10:30:00Z",
+      "installed": false,
+      "updateAvailable": false,
+      "categories": ["customization", "appearance"],
+      "tags": ["theme", "colors", "typography", "dark-mode", "nord", "dracula", "catppuccin", "material", "cyberpunk", "customization"],
+      "homepage": "https://github.com/izo/stomy-plugins/tree/main/core/theme-manager",
+      "enabled": false
     }
   ]
 }
