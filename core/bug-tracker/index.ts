@@ -13,3 +13,7 @@ export {
   formatGitHubIssue,
   checkGitHubAuth,
 } from './BugTrackerPlugin';
+
+// UI Components
+export { BugTrackerPanel } from './BugTrackerPanel';
+export { BugSubmitModal } from './BugSubmitModal';
