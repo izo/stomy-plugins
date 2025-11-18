@@ -13,6 +13,7 @@ import {
   deleteCustomTheme,
   exportThemeToJson,
 } from './customThemes';
+import { ThemeManagerSettings as ThemeManagerSettingsComponent } from './ThemeManagerSettings';
 
 const LOG_PREFIX = '[ThemeManager]';
 
@@ -569,14 +570,12 @@ export const themeManagerPlugin: Plugin = {
     reducedMotion: false,
   } as ThemeManagerSettings,
 
-  // === Sidebar Integration ===
-  sidebar: {
-    id: 'theme-manager-tab',
+  // === Settings Tab Integration ===
+  settingsTab: {
+    id: 'theme-manager-settings',
     label: 'Thèmes',
-    icon: 'ColorRegular',
-    position: 'bottom',
-    color: '#b48ead', // Nord purple (Aurora)
-    component: 'ThemeManagerPanel',
+    icon: 'Palette',
+    component: ThemeManagerSettingsComponent,
   },
 
   // === Lifecycle Hooks ===

@@ -21,3 +21,6 @@ export {
   trackEvent,
   reloadCustomThemes,
 } from './ThemeManagerPlugin';
+
+// UI Components
+export { ThemeManagerSettings } from './ThemeManagerSettings';
