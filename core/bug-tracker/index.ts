@@ -17,3 +17,4 @@ export {
 // UI Components
 export { BugTrackerPanel } from './BugTrackerPanel';
 export { BugSubmitModal } from './BugSubmitModal';
+export { BugTrackerSettings } from './BugTrackerSettings';

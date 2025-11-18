@@ -6,6 +6,7 @@
 import { invoke } from '@tauri-apps/api/core';
 import type { Plugin } from '../types';
 import { notificationService } from '../../../../services/notificationService';
+import { BugTrackerSettings as BugTrackerSettingsComponent } from './BugTrackerSettings';
 import type {
   BugReport,
   SystemContext,
@@ -247,14 +248,12 @@ export const bugTrackerPlugin: Plugin = {
     sidebarPosition: 'bottom',
   } as BugTrackerSettings,
 
-  // Sidebar integration
-  sidebar: {
-    id: 'bug-tracker-tab',
+  // Settings tab integration
+  settingsTab: {
+    id: 'bug-tracker-settings',
     label: 'Bug Tracker',
-    icon: 'BugRegular',
-    position: 'bottom', // Position above footer
-    color: '#ef4444', // Red color (Tailwind red-500)
-    component: 'BugTrackerPanel', // Component name to render
+    icon: 'BugReport',
+    component: BugTrackerSettingsComponent,
   },
 
   // Lifecycle hooks
