@@ -132,7 +132,7 @@ export const navTagsPlugin: Plugin = {
 
     await notificationService.notify({
       title: 'Nav Tags',
-      body: '🏷️ Plugin installé! Activez-le pour naviguer par tags.',
+      body: 'Plugin installé! Activez-le pour naviguer par tags.',
     });
   },
 
@@ -165,7 +165,7 @@ export const navTagsPlugin: Plugin = {
   actions: [
     {
       id: 'refresh-tags',
-      label: '🔄 Actualiser les tags',
+      label: 'Actualiser les tags',
       icon: 'ArrowSyncRegular',
       context: 'global',
       onClick: async () => {
@@ -196,7 +196,7 @@ export const navTagsPlugin: Plugin = {
     },
     {
       id: 'view-tag-stats',
-      label: '📊 Statistiques des tags',
+      label: 'Statistiques des tags',
       icon: 'ChartMultipleRegular',
       context: 'global',
       onClick: async () => {
@@ -204,7 +204,7 @@ export const navTagsPlugin: Plugin = {
           const stats = await getTagStats();
 
           const message = `
-📊 STATISTIQUES DES TAGS
+STATISTIQUES DES TAGS
 
 Total de tags: ${stats.totalTags}
 Total de livres: ${stats.totalBooks}
@@ -227,7 +227,7 @@ ${stats.mostUsedTag ? `\nTag le plus utilisé:\n${stats.mostUsedTag.name} (${sta
     },
     {
       id: 'toggle-sort',
-      label: '🔀 Changer le tri',
+      label: 'Changer le tri',
       icon: 'ArrowSortRegular',
       context: 'settings',
       onClick: async function () {
@@ -250,7 +250,7 @@ ${stats.mostUsedTag ? `\nTag le plus utilisé:\n${stats.mostUsedTag.name} (${sta
     },
     {
       id: 'toggle-empty-tags',
-      label: '👁️ Afficher/masquer tags vides',
+      label: 'Afficher/masquer tags vides',
       icon: 'EyeRegular',
       context: 'settings',
       onClick: async function () {
@@ -274,7 +274,7 @@ ${stats.mostUsedTag ? `\nTag le plus utilisé:\n${stats.mostUsedTag.name} (${sta
   menuItems: [
     {
       id: 'open-tags',
-      label: '🏷️ Ouvrir la navigation par tags',
+      label: 'Ouvrir la navigation par tags',
       icon: 'TagRegular',
       action: async () => {
         await notificationService.notify({
@@ -285,7 +285,7 @@ ${stats.mostUsedTag ? `\nTag le plus utilisé:\n${stats.mostUsedTag.name} (${sta
     },
     {
       id: 'view-all-tags',
-      label: '📋 Liste complète des tags',
+      label: 'Liste complète des tags',
       icon: 'ListRegular',
       action: async () => {
         try {
@@ -299,7 +299,7 @@ ${stats.mostUsedTag ? `\nTag le plus utilisé:\n${stats.mostUsedTag.name} (${sta
             .join('\n');
 
           const message = sorted.length > 0
-            ? `📋 TAGS (${sorted.length} total)\n\n${tagList}${sorted.length > 20 ? '\n\n... et plus' : ''}`
+            ? `TAGS (${sorted.length} total)\n\n${tagList}${sorted.length > 20 ? '\n\n... et plus' : ''}`
             : 'Aucun tag trouvé';
 
           alert(message);

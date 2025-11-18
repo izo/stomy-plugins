@@ -47,7 +47,7 @@ export const pluginDocsPlugin: Plugin = {
 
     await notificationService.notify({
       title: 'Plugin Documentation',
-      body: '📚 Plugin installé! Voir le README pour la documentation complète.',
+      body: ' Plugin installé! Voir le README pour la documentation complète.',
     });
   },
 
@@ -74,7 +74,7 @@ export const pluginDocsPlugin: Plugin = {
 
     await notificationService.notify({
       title: 'Plugin Documentation',
-      body: '✅ Plugin activé! Consultez les actions disponibles.',
+      body: ' Plugin activé! Consultez les actions disponibles.',
     });
   },
 
@@ -100,7 +100,7 @@ export const pluginDocsPlugin: Plugin = {
 
     await notificationService.notify({
       title: 'Plugin Documentation',
-      body: `📦 Mis à jour vers ${newVersion}`,
+      body: ` Mis à jour vers ${newVersion}`,
     });
   },
 
@@ -111,14 +111,14 @@ export const pluginDocsPlugin: Plugin = {
     // Action globale - disponible partout
     {
       id: 'show-docs',
-      label: '📚 Voir la documentation',
+      label: ' Voir la documentation',
       icon: 'DocumentTextRegular',
       context: 'global',
       onClick: async () => {
         console.log(`${LOG_PREFIX} Opening documentation...`);
 
         const docs = `
-📚 DOCUMENTATION DES PLUGINS STOMY
+ DOCUMENTATION DES PLUGINS STOMY
 
 Fichiers disponibles dans dummy-plugin/:
 
@@ -180,7 +180,7 @@ Consultez ces fichiers pour créer vos propres plugins!
     // Action de démonstration des logs
     {
       id: 'demo-logging',
-      label: '📝 Démo Logging',
+      label: ' Démo Logging',
       icon: 'DocumentBulletListRegular',
       context: 'settings',
       onClick: () => {
@@ -240,12 +240,12 @@ Consultez ces fichiers pour créer vos propres plugins!
     // Action de démonstration des hooks
     {
       id: 'demo-lifecycle',
-      label: '🔄 Démo Lifecycle Hooks',
+      label: ' Démo Lifecycle Hooks',
       icon: 'ArrowRepeatAllRegular',
       context: 'settings',
       onClick: async () => {
         const lifecycleInfo = `
-🔄 LIFECYCLE HOOKS DISPONIBLES
+ LIFECYCLE HOOKS DISPONIBLES
 
 1. onInstall()
    - Appelé à l'installation
@@ -285,11 +285,11 @@ vérifiez la console pour voir les logs!
   menuItems: [
     {
       id: 'open-spec',
-      label: '📋 Voir les spécifications',
+      label: ' Voir les spécifications',
       icon: 'DocumentRegular',
       action: async () => {
         alert(
-          '📋 PLUGIN_SPEC.md\n\n' +
+          ' PLUGIN_SPEC.md\n\n' +
           'Ouvrez le fichier PLUGIN_SPEC.md pour voir:\n' +
           '- Interface Plugin complète\n' +
           '- Types de plugins (Standard, Export, Sync)\n' +
@@ -304,11 +304,11 @@ vérifiez la console pour voir les logs!
     },
     {
       id: 'open-guide',
-      label: '📖 Guide de développement',
+      label: ' Guide de développement',
       icon: 'BookRegular',
       action: async () => {
         alert(
-          '📖 DEVELOPMENT_GUIDE.md\n\n' +
+          ' DEVELOPMENT_GUIDE.md\n\n' +
           'Guide pas-à-pas pour créer un plugin:\n' +
           '1. Démarrage rapide\n' +
           '2. Définir les types\n' +
@@ -322,11 +322,11 @@ vérifiez la console pour voir les logs!
     },
     {
       id: 'open-examples',
-      label: '💡 Voir les exemples',
+      label: ' Voir les exemples',
       icon: 'LightbulbRegular',
       action: async () => {
         alert(
-          '💡 EXAMPLES.md\n\n' +
+          ' EXAMPLES.md\n\n' +
           'Exemples de plugins:\n' +
           '- Plugin Simple\n' +
           '- Plugin avec Settings\n' +

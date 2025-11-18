@@ -4,7 +4,7 @@
  */
 
 import { useState } from 'react'
-import { X } from '@/utils/icons'
+import { X, Info } from '@/utils/icons'
 import { submitBugReport } from './BugTrackerPlugin'
 import { notificationService } from '@/services/notificationService'
 
@@ -139,10 +139,10 @@ export function BugSubmitModal({ isOpen, onClose, onSuccess }: BugSubmitModalPro
                 className="w-full px-4 py-2.5 bg-[var(--color-input)] text-[var(--color-text-primary)] rounded-lg border border-[var(--color-separator)] focus:outline-none focus:ring-2 focus:ring-red-500/30 macos-transition"
                 disabled={isSubmitting}
               >
-                <option value="bug">🐛 Bug</option>
-                <option value="feature">✨ Feature Request</option>
-                <option value="question">❓ Question</option>
-                <option value="enhancement">🚀 Enhancement</option>
+                <option value="bug">Bug</option>
+                <option value="feature">Feature Request</option>
+                <option value="question">Question</option>
+                <option value="enhancement">Enhancement</option>
               </select>
             </div>
 
@@ -158,18 +158,19 @@ export function BugSubmitModal({ isOpen, onClose, onSuccess }: BugSubmitModalPro
                 className="w-full px-4 py-2.5 bg-[var(--color-input)] text-[var(--color-text-primary)] rounded-lg border border-[var(--color-separator)] focus:outline-none focus:ring-2 focus:ring-red-500/30 macos-transition"
                 disabled={isSubmitting}
               >
-                <option value="low">🟢 Faible</option>
-                <option value="medium">🟡 Moyen</option>
-                <option value="high">🟠 Élevé</option>
-                <option value="critical">🔴 Critique</option>
+                <option value="low">Faible</option>
+                <option value="medium">Moyen</option>
+                <option value="high">Élevé</option>
+                <option value="critical">Critique</option>
               </select>
             </div>
           </div>
 
           {/* Info note */}
           <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg">
-            <p className="text-sm text-blue-600 dark:text-blue-400">
-              ℹ️ Les informations système (OS, navigateur, résolution) et une capture d'écran seront automatiquement ajoutées au rapport.
+            <p className="text-sm text-blue-600 dark:text-blue-400 flex items-start gap-2">
+              <Info className="w-4 h-4 mt-0.5 flex-shrink-0" />
+              <span>Les informations système (OS, navigateur, résolution) et une capture d'écran seront automatiquement ajoutées au rapport.</span>
             </p>
           </div>
 

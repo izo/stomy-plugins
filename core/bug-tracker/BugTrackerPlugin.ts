@@ -139,7 +139,7 @@ function formatGitHubIssue(
   let body = `${report.description}\n\n---\n\n`;
 
   // Context section
-  body += `## 📋 Contexte\n\n`;
+  body += `## Contexte\n\n`;
   body += `**Catégorie**: ${report.category}\n`;
   body += `**Sévérité**: ${report.severity}\n`;
   if (report.page) body += `**Page**: ${report.page}\n`;
@@ -148,7 +148,7 @@ function formatGitHubIssue(
   body += `**Source**: Bug Tracker interne (Application Desktop)\n\n`;
 
   // Environment section
-  body += `## 💻 Environnement utilisateur\n\n`;
+  body += `## Environnement utilisateur\n\n`;
   body += `**Navigateur**: ${context.browser} ${context.browserVersion}${context.isWebView ? ' (WebView)' : ''}\n`;
   body += `**OS**: ${context.os} ${context.osVersion}\n`;
   body += `**Platform**: ${context.platform}\n`;
@@ -163,7 +163,7 @@ function formatGitHubIssue(
 
   // Screenshot section
   if (report.screenshot) {
-    body += `\n## 📸 Screenshot\n\n`;
+    body += `\n## Screenshot\n\n`;
     body += `![Screenshot](${report.screenshot})\n`;
   }
 

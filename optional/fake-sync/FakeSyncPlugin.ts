@@ -406,7 +406,7 @@ export const fakeSyncPlugin: Plugin = {
         ).toFixed(1);
 
         const info = `
-📱 Device Information
+Device Information
 
 Name: ${currentFakeDevice.name}
 Type: ${currentFakeDevice.type.toUpperCase()}
@@ -414,12 +414,12 @@ Model: ${currentFakeDevice.model}
 Serial: ${currentFakeDevice.serialNumber}
 Mount Path: ${currentFakeDevice.mountPath}
 
-💾 Storage
+Storage
 Capacity: ${formatBytes(currentFakeDevice.capacity * 1024 * 1024)}
 Used: ${formatBytes(currentFakeDevice.usedSpace * 1024 * 1024)} (${usedPercent}%)
 Free: ${formatBytes(freeSpace * 1024 * 1024)}
 
-📚 Supported Formats
+Supported Formats
 ${currentFakeDevice.supportedFormats.map((f) => f.toUpperCase()).join(', ')}
         `.trim();
 
