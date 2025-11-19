@@ -1,0 +1,225 @@
+{
+  "id": "remarkable-sync",
+  "name": "reMarkable Sync",
+  "version": "1.0.0",
+  "description": "Synchronize your ebook library with reMarkable e-paper tablets via USB or SSH. Supports EPUB and PDF formats natively.",
+  "author": "Stomy Team",
+  "license": "Internal",
+  "repository": "https://github.com/izo/stomy-plugins",
+  "homepage": "https://github.com/izo/stomy-plugins/tree/main/optional/remarkable-sync",
+  "icon": "TabletRegular",
+  "category": "sync",
+  "tags": ["sync", "remarkable", "ereader", "epub", "pdf", "usb", "tablet"],
+  "enabled": false,
+  "minStomyVersion": "1.0.0",
+  "permissions": [
+    "fs:read",
+    "fs:write",
+    "tauri:*",
+    "http:*"
+  ],
+  "capabilities": {
+    "deviceSync": true,
+    "batchSync": true,
+    "storageCheck": true,
+    "formatSupport": ["epub", "pdf"],
+    "connectionTypes": ["usb", "ssh"],
+    "readingProgressImport": false,
+    "annotationSync": false
+  },
+  "supportedDevices": [
+    {
+      "manufacturer": "reMarkable AS",
+      "model": "reMarkable 1",
+      "connectionType": "usb"
+    },
+    {
+      "manufacturer": "reMarkable AS",
+      "model": "reMarkable 2",
+      "connectionType": "usb"
+    },
+    {
+      "manufacturer": "reMarkable AS",
+      "model": "reMarkable Paper Pro",
+      "connectionType": "usb"
+    }
+  ],
+  "settings": {
+    "connection": {
+      "connectionMethod": {
+        "type": "select",
+        "default": "usb",
+        "options": ["usb", "ssh", "cloud"],
+        "label": "Connection Method",
+        "description": "How to connect to your reMarkable tablet"
+      },
+      "sshHost": {
+        "type": "string",
+        "default": "10.11.99.1",
+        "label": "SSH Host",
+        "description": "IP address for SSH connection"
+      },
+      "sshPort": {
+        "type": "number",
+        "default": 22,
+        "label": "SSH Port",
+        "description": "Port number for SSH connection"
+      }
+    },
+    "upload": {
+      "targetFolder": {
+        "type": "string",
+        "default": "/",
+        "label": "Target Folder",
+        "description": "Root folder on reMarkable device"
+      },
+      "createLibraryFolders": {
+        "type": "boolean",
+        "default": true,
+        "label": "Create Library Folders",
+        "description": "Organize books by library name"
+      },
+      "libraryFolderPrefix": {
+        "type": "string",
+        "default": "Stomy-",
+        "label": "Library Folder Prefix",
+        "description": "Prefix for library folder names"
+      }
+    },
+    "fileHandling": {
+      "maxFileSize": {
+        "type": "number",
+        "default": 100,
+        "min": 1,
+        "max": 100,
+        "label": "Max File Size (MB)",
+        "description": "Maximum file size for USB upload (API limit: 100MB)"
+      },
+      "convertEpubToPdf": {
+        "type": "boolean",
+        "default": false,
+        "label": "Convert EPUB to PDF",
+        "description": "Automatically convert EPUB files to PDF (future feature)"
+      }
+    },
+    "ui": {
+      "showNotifications": {
+        "type": "boolean",
+        "default": true,
+        "label": "Show Notifications",
+        "description": "Display upload progress notifications"
+      },
+      "confirmBeforeSync": {
+        "type": "boolean",
+        "default": true,
+        "label": "Confirm Before Sync",
+        "description": "Ask for confirmation before syncing"
+      }
+    },
+    "advanced": {
+      "debugMode": {
+        "type": "boolean",
+        "default": false,
+        "label": "Debug Mode",
+        "description": "Enable detailed logging for troubleshooting"
+      }
+    }
+  },
+  "actions": [
+    {
+      "id": "detect-remarkable",
+      "label": "Detect reMarkable Tablet",
+      "icon": "SearchRegular",
+      "context": "global",
+      "shortcut": "Ctrl+Shift+R"
+    },
+    {
+      "id": "sync-to-remarkable",
+      "label": "Sync to reMarkable",
+      "icon": "ArrowSyncRegular",
+      "context": "book"
+    },
+    {
+      "id": "batch-sync-remarkable",
+      "label": "Batch Sync to reMarkable",
+      "icon": "ArrowSyncRegular",
+      "context": "library"
+    },
+    {
+      "id": "check-remarkable-storage",
+      "label": "Check Storage",
+      "icon": "DatabaseRegular",
+      "context": "global"
+    },
+    {
+      "id": "open-remarkable-web-ui",
+      "label": "Open reMarkable Web Interface",
+      "icon": "GlobeRegular",
+      "context": "settings"
+    }
+  ],
+  "requirements": {
+    "reMarkableDevice": {
+      "usbWebInterface": true,
+      "usbConnection": true,
+      "minimumFirmware": "2.0.0"
+    },
+    "network": {
+      "localAccess": true,
+      "internetRequired": false
+    }
+  },
+  "documentation": {
+    "readme": "README.md",
+    "integration": "INTEGRATION.md",
+    "examples": "https://github.com/izo/stomy-plugins/tree/main/dummy-plugin/EXAMPLES.md"
+  },
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2025-11-19",
+      "changes": [
+        "Initial release",
+        "USB Web Interface support",
+        "EPUB and PDF upload",
+        "Batch sync functionality",
+        "Storage checking",
+        "Library folder organization"
+      ]
+    }
+  ],
+  "roadmap": [
+    {
+      "phase": 2,
+      "features": [
+        "Reading progress import",
+        "Annotation sync",
+        "Automatic EPUB to PDF conversion",
+        "SSH fallback for large files"
+      ]
+    },
+    {
+      "phase": 3,
+      "features": [
+        "Bidirectional sync",
+        "Conflict resolution",
+        "Cloud sync integration",
+        "Wireless sync over WiFi"
+      ]
+    }
+  ],
+  "compatibility": {
+    "platforms": ["windows", "macos", "linux"],
+    "architectures": ["x64", "arm64"],
+    "stomy": ">=1.0.0"
+  },
+  "external": {
+    "rustBackend": true,
+    "dependencies": {
+      "reqwest": "^0.11",
+      "tokio": "^1.0",
+      "mime_guess": "^2.0",
+      "chrono": "^0.4"
+    }
+  }
+}
